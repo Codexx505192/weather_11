@@ -7,7 +7,7 @@
 .container{
   width: 1200px;
   margin-inline: auto;
-  background-color: #343D4B;
+  background-color:#343d4b;
   /* height: 100vh; */
 }
 
@@ -287,12 +287,12 @@ height: 28px;
 }
 
 
-/* Вспомогательный класс для скрытия элементов */
+
 .hidden {
   display: none !important;
 }
 
-/* Контейнер для кнопки и инпута */
+
 .city_search_wrapper {
   width: 415px;
 }
@@ -444,14 +444,8 @@ height: 28px;
     width: 500px;
   }
 
-  .weather_itm {
-    width: 670px;
-    gap: 20px;
-    flex-direction: column;
-}
-
-  .weather_itm {
-    width: 470px;
+.weather_itm {
+    width: 439px;
     gap: 20px;
     flex-direction: column;
 }
