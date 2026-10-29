@@ -7,7 +7,7 @@
 .container{
   width: 1200px;
   margin-inline: auto;
-  background-color:#343d4b;
+  background-color: #343D4B;
   /* height: 100vh; */
 }
 
@@ -449,12 +449,38 @@ height: 28px;
     gap: 20px;
     flex-direction: column;
 }
+
+.weather_itm_b {
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+    align-items: center;
+    gap: 3px;
+}
+
+.city_search_wrapper {
+    width: 280px;
+}
+
+
+.city_form {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    flex-direction: column;
+}
 }
 
 @media (max-width: 576px) {
   .container{
     width: 100%;
   }
+
+  .btn_1 {
+    width: 270px;
+    height: 53px;
+    gap: 10px;
+    font-size: 20px;
+}
 }
 
 @media (max-width: 375px) {
