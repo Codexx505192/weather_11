@@ -3,8 +3,10 @@ import { ref, onMounted } from 'vue';
 
 const apiKey = '4d9443fc16b3aac786cc0b8ec5057004';
 
+// 1. При инициализации берем город из localStorage или ставим 'Москва' по умолчанию
+const savedCity = localStorage.getItem('userCity') || 'Москва';
 
-const cityName = ref('Москва');
+const cityName = ref(savedCity);
 const temp = ref(0);
 const description = ref('');
 const humidity = ref(0);
@@ -15,7 +17,6 @@ const isEditingCity = ref(false);
 const cityInputValue = ref('');
 const activeCardIndex = ref(0);
 
-
 const weatherIcon = ref('/icons/icon_2.png');
 
 const forecast = ref([
@@ -25,18 +26,16 @@ const forecast = ref([
   { day: 'Сб', temp: '26 °C', icon: '/icons/Sun.svg' }
 ]);
 
-
 function updateWeatherAssets(iconCode) {
   if (iconCode) {
     weatherIcon.value = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
   }
 }
 
-
 async function fetchWeatherData(city) {
   try {
     const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&lang=ru&appid=${apiKey}`
+      `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&units=metric&lang=ru&appid=${apiKey}`
     );
 
     if (!response.ok) throw new Error('Город не найден');
@@ -54,6 +53,9 @@ async function fetchWeatherData(city) {
     rainChance.value = data.clouds ? data.clouds.all : 0;
 
     updateWeatherAssets(data.weather[0].icon);
+
+    // 2. Сохраняем успешно найденный город в localStorage
+    localStorage.setItem('userCity', data.name);
 
   } catch (error) {
     alert('Не удалось получить данные для этого города. Проверьте название.');
@@ -78,7 +80,8 @@ function selectCard(index) {
 }
 
 onMounted(() => {
-  fetchWeatherData('Moscow');
+  // 3. Запрашиваем погоду для сохраненного города
+  fetchWeatherData(cityName.value);
 });
 </script>
 
